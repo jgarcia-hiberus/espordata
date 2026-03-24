@@ -1,0 +1,107 @@
+
+@prefix pig: <https://espordata.eu/vocab/pig#> . #Example domain
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix s4agri: <https://saref.etsi.org/saref4agri/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+
+# ========================================
+# LOTES (BATCHES)
+# ========================================
+
+pig:Batch a owl:Class ;
+    rdfs:label "Lote de animales"@es ;
+    rdfs:label "Animal batch"@en ;
+    rdfs:subClassOf s4agri:LivestockGroup ;
+    rdfs:comment "Grupo homogéneo de animales que comparten ciclo productivo."@es .
+
+pig:batchId a owl:DatatypeProperty ;
+    rdfs:label "Identificador de lote"@es ;
+    rdfs:label "Batch identifier"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Identificador único global del lote."@es .
+
+pig:batchLocalCode a owl:DatatypeProperty ;
+    rdfs:label "Código local de lote"@es ;
+    rdfs:label "Local batch code"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Código utilizado localmente en la granja."@es .
+
+pig:farm a owl:ObjectProperty ;
+    rdfs:label "Explotación del lote"@es ;
+    rdfs:label "Farm of batch"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range pig:Farm .
+
+pig:birthDate a owl:DatatypeProperty ;
+    rdfs:label "Fecha de nacimiento"@es ;
+    rdfs:label "Birth date"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Fecha de nacimiento promedio o fecha de entrada a primera nave."@es .
+
+pig:entryDate a owl:DatatypeProperty ;
+    rdfs:label "Fecha de entrada"@es ;
+    rdfs:label "Entry date"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Fecha entrada al ciclo/nave."@es .
+
+pig:exitDate a owl:DatatypeProperty ;
+    rdfs:label "Fecha de salida"@es ;
+    rdfs:label "Exit date"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:date .
+
+pig:numberOfAnimalsIn a owl:DatatypeProperty ;
+    rdfs:label "Número de animales entrada"@es ;
+    rdfs:label "Number of animals in"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:integer .
+
+pig:totalWeight a owl:DatatypeProperty ;
+    rdfs:label "Peso total"@es ;
+    rdfs:label "Total weight"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Peso total del lote (kg)."@es .
+
+pig:averageWeight a owl:DatatypeProperty ;
+    rdfs:label "Peso medio"@es ;
+    rdfs:label "Average weight"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Peso medio (kg)."@es .
+
+pig:documentation a owl:DatatypeProperty ;
+    rdfs:label "Documentación"@es ;
+    rdfs:label "Documentation"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Referencia a documentos (PDF, etc.)."@es .
+
+pig:note a owl:DatatypeProperty ;
+    rdfs:label "Observaciones"@es ;
+    rdfs:label "Notes"@en ;
+    rdfs:range xsd:string .
+
+pig:breed a owl:ObjectProperty ;
+    rdfs:label "Raza o línea genética"@es ;
+    rdfs:label "Breed or genetic line"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range skos:Concept ;
+    rdfs:comment "Raza principal del lote. Referencia a pig:BreedScheme."@es .
+
+pig:buildingCode a owl:DatatypeProperty ;
+    rdfs:label "Código de nave/corral"@es ;
+    rdfs:label "Building/pen code"@en ;
+    rdfs:domain pig:Batch ;
+    rdfs:range xsd:string .

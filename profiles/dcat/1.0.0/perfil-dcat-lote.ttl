@@ -1,0 +1,141 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix prof:  <http://www.w3.org/ns/dx/prof/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix pig:   <https://example-pork.eu/ontology#> .
+@prefix porkp: <https://pork-dataspace.eu/profiles/dcat/> .
+
+# ─────────────────────────────────────────────────────────
+#  PERFIL DCAT — Lote de Cerdos
+#  URI canónica: https://pork-dataspace.eu/profiles/dcat/1.0.0
+#  Este documento describe QUÉ debe contener un descriptor
+#  DCAT para datasets de tipo pig:PigBatch.
+#  NO es ejecutable — es la especificación normativa.
+# ─────────────────────────────────────────────────────────
+
+porkp:1.0.0
+    a                    dcat:DatasetSeries, prof:Profile ;
+    rdfs:label           "Perfil DCAT — Lote de Cerdos"@es ;
+    rdfs:comment         """
+        Perfil DCAT obligatorio para publicar datasets de tipo pig:PigBatch
+        en el Pork Data Space. Basado en DCAT-AP 2.1.
+        Todo descriptor que no cumpla este perfil será rechazado por el catálogo.
+    """@es ;
+    owl:versionInfo      "1.0.0" ;
+    dct:issued           "2025-01-01"^^xsd:date ;
+    dct:publisher        <https://pork-dataspace.eu/governance> ;
+    dct:isProfileOf      <https://www.w3.org/TR/vocab-dcat-2/> ;
+
+    # Recurso normativo: el validador SHACL que implementa este perfil
+    prof:hasResource [
+        a                   prof:ResourceDescriptor ;
+        rdfs:label          "Validador SHACL del perfil"@es ;
+        prof:hasRole        prof:validation ;
+        prof:hasArtifact    <https://pork-dataspace.eu/profiles/dcat/1.0.0/shacl> ;
+        dct:format          <https://www.iana.org/assignments/media-types/text/turtle> ;
+    ] .
+
+# ─────────────────────────────────────────────────────────
+#  Propiedades OBLIGATORIAS para dcat:Dataset
+# ─────────────────────────────────────────────────────────
+
+porkp:req-title a rdf:Property ;
+    rdfs:label      "Título obligatorio"@es ;
+    rdfs:comment    "dct:title en español. Mínimo 1, sin límite."@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      rdf:langString ;
+    owl:minCardinality 1 .
+
+porkp:req-description a rdf:Property ;
+    rdfs:label      "Descripción obligatoria"@es ;
+    rdfs:comment    "dct:description en español. Mínimo 1."@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      rdf:langString ;
+    owl:minCardinality 1 .
+
+porkp:req-identifier a rdf:Property ;
+    rdfs:label      "Identificador persistente"@es ;
+    rdfs:comment    """
+        dct:identifier con patrón urn:pork-ds:<tipo>:<org>:<año>.
+        Exactamente 1. Ejemplo: urn:pork-ds:lote:granja-pepe:2024
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      xsd:string ;
+    owl:cardinality 1 .
+
+porkp:req-subject a rdf:Property ;
+    rdfs:label      "Referencia al Dataset Tipo Oficial"@es ;
+    rdfs:comment    "dct:subject debe apuntar a pig:PigBatch."@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      owl:Class .
+
+porkp:req-conformsTo a rdf:Property ;
+    rdfs:label      "Versión del modelo de datos"@es ;
+    rdfs:comment    """
+        dct:conformsTo debe referenciar la URI versionada del modelo PigBatch.
+        Patrón: https://pork-dataspace.eu/models/PigBatch/<semver>
+    """@es ;
+    rdfs:domain     dcat:Dataset .
+
+porkp:req-theme a rdf:Property ;
+    rdfs:label      "Temática EU Data Themes"@es ;
+    rdfs:comment    "dcat:theme debe incluir el código AGRI del vocabulario EU."@es ;
+    rdfs:domain     dcat:Dataset .
+
+porkp:req-publisher a rdf:Property ;
+    rdfs:label      "Publisher"@es ;
+    rdfs:comment    "dct:publisher. Exactamente 1, debe tener foaf:name."@es ;
+    rdfs:domain     dcat:Dataset ;
+    owl:cardinality 1 .
+
+porkp:req-license a rdf:Property ;
+    rdfs:label      "Licencia"@es ;
+    rdfs:comment    "dct:license. Exactamente 1, referenciada por IRI."@es ;
+    rdfs:domain     dcat:Dataset ;
+    owl:cardinality 1 .
+
+porkp:req-accessRights a rdf:Property ;
+    rdfs:label      "Derechos de acceso"@es ;
+    rdfs:comment    """
+        dct:accessRights con vocabulario EU Access Right.
+        Valores permitidos: PUBLIC, RESTRICTED, NON_PUBLIC.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    owl:cardinality 1 .
+
+porkp:req-distribution a rdf:Property ;
+    rdfs:label      "Distribución"@es ;
+    rdfs:comment    """
+        dcat:distribution. Al menos 1. Cada distribución debe tener
+        título, mediaType (application/json | text/csv | application/ld+json),
+        accessURL o downloadURL, y dct:conformsTo apuntando al modelo PigBatch.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    owl:minCardinality 1 .
+
+# ─────────────────────────────────────────────────────────
+#  Propiedades RECOMENDADAS
+# ─────────────────────────────────────────────────────────
+
+porkp:rec-temporal a rdf:Property ;
+    rdfs:label   "Cobertura temporal"@es ;
+    rdfs:comment "dct:temporal. Nodo dcat:PeriodOfTime con dcat:startDate."@es ;
+    rdfs:domain  dcat:Dataset .
+
+porkp:rec-accrualPeriodicity a rdf:Property ;
+    rdfs:label   "Frecuencia de actualización"@es ;
+    rdfs:comment "dct:accrualPeriodicity. IRI del vocabulario EU Frequency."@es ;
+    rdfs:domain  dcat:Dataset .
+
+porkp:rec-spatial a rdf:Property ;
+    rdfs:label   "Ámbito geográfico"@es ;
+    rdfs:comment "dct:spatial. IRI de un recurso geográfico."@es ;
+    rdfs:domain  dcat:Dataset .
+
+porkp:rec-contactPoint a rdf:Property ;
+    rdfs:label   "Punto de contacto"@es ;
+    rdfs:comment "dcat:contactPoint. Nodo vcard con vcard:fn y vcard:hasEmail."@es ;
+    rdfs:domain  dcat:Dataset .
