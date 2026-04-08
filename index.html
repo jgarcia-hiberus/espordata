@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPORDATA — Espacio de Datos Porcino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f5f3ee;--ink:#1a1a18;--ink2:#4a4a46;--ink3:#8a8a84;
+    --accent:#2d6a4f;--accent2:#b7c9a8;--rule:#d8d4cc;--card:#ffffff;
+    --tag-vocab:#e8f4ec;--tag-vocab-ink:#1a4d32;
+    --tag-profile:#ede8f8;--tag-profile-ink:#3d2680;
+    --tag-shape:#fdf0dc;--tag-shape-ink:#6b3d00;
+    --tag-tool:#e8eef8;--tag-tool-ink:#1a2d5a;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6}
+  header{border-bottom:1px solid var(--rule);padding:48px 0 40px;background:var(--card)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 32px}
+  .header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .logo-area{display:flex;flex-direction:column;gap:8px}
+  .badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent2);padding:3px 8px;border-radius:2px;width:fit-content}
+  h1{font-size:32px;font-weight:500;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+  h1 span{color:var(--accent)}
+  .tagline{color:var(--ink2);font-weight:300;font-size:15px;max-width:480px;margin-top:10px}
+  .meta-pills{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;padding-top:4px}
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 10px;border-radius:2px;white-space:nowrap}
+  .pill-gray{background:#eeebe4;color:var(--ink2)}
+  .uri-bar{margin-top:28px;padding:14px 18px;background:var(--ink);border-radius:4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .uri-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);white-space:nowrap}
+  .uri-value{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#e8e4dc;word-break:break-all}
+  main{padding:48px 0 80px}
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+  .artifact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px}
+  @media(max-width:600px){.artifact-grid{grid-template-columns:1fr}}
+  .artifact-card{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:20px 22px;text-decoration:none;color:inherit;display:block;transition:border-color .15s,box-shadow .15s}
+  .artifact-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(45,106,79,.08)}
+  .card-tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:10px}
+  .tag-vocab{background:var(--tag-vocab);color:var(--tag-vocab-ink)}
+  .tag-profile{background:var(--tag-profile);color:var(--tag-profile-ink)}
+  .tag-shape{background:var(--tag-shape);color:var(--tag-shape-ink)}
+  .tag-tool{background:var(--tag-tool);color:var(--tag-tool-ink)}
+  .card-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+  .card-desc{font-size:13px;color:var(--ink2);font-weight:300;margin-bottom:12px;line-height:1.5}
+  .card-uri{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);word-break:break-all;padding-top:10px;border-top:1px solid var(--rule)}
+  .card-uri span{color:var(--accent)}
+  .validation-box{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:24px 26px;margin-bottom:40px}
+  .validation-box h3{font-size:15px;font-weight:500;margin-bottom:6px}
+  .validation-box p{font-size:13px;color:var(--ink2);font-weight:300;margin-bottom:16px}
+  .code-block{background:var(--ink);border-radius:3px;padding:14px 16px;margin-bottom:16px}
+  .code-block code{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#e8e4dc;display:block;line-height:1.9}
+  .code-block code .comment{color:#6a7d6a}
+  .code-block code .cmd{color:var(--accent2)}
+  .pipeline{display:flex;gap:0;margin-bottom:40px;flex-wrap:wrap}
+  .pipeline-step{flex:1;min-width:160px;background:var(--card);border:1px solid var(--rule);border-right:none;padding:18px 16px}
+  .pipeline-step:first-child{border-radius:4px 0 0 4px}
+  .pipeline-step:last-child{border-radius:0 4px 4px 0;border-right:1px solid var(--rule)}
+  .step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);margin-bottom:6px}
+  .step-title{font-size:13px;font-weight:500;margin-bottom:4px}
+  .step-desc{font-size:12px;color:var(--ink2);font-weight:300;line-height:1.4}
+  .conformance-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .conf-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border-radius:2px;border:1px solid var(--rule);color:var(--ink2)}
+  footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--card)}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .footer-left{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3)}
+  .footer-links{display:flex;gap:20px}
+  .footer-links a{font-size:12px;color:var(--ink3);text-decoration:none;transition:color .15s}
+  .footer-links a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="header-top">
+      <div class="logo-area">
+        <span class="badge">Pork Data Space</span>
+        <h1>ESPOR<span>DATA</span></h1>
+        <p class="tagline">Repositorio de artefactos semánticos para el espacio de datos del sector porcino español.</p>
+        <div class="conformance-row">
+          <span class="conf-badge">DCAT-AP 2.1</span>
+          <span class="conf-badge">IDSA</span>
+          <span class="conf-badge">Gaia-X</span>
+          <span class="conf-badge">W3C SHACL</span>
+          <span class="conf-badge">OWL / RDFS</span>
+        </div>
+      </div>
+      <div class="meta-pills">
+        <span class="pill pill-gray">v1.0.0</span>
+        <span class="pill pill-gray">Piloto · Lote</span>
+      </div>
+    </div>
+    <div class="uri-bar">
+      <span class="uri-label">Base URI</span>
+      <span class="uri-value">https://jgarciad-hiberus.github.io/espordata/</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="section-label">Vocabulario del dominio</p>
+    <div class="artifact-grid">
+      <a class="artifact-card" href="vocab/pig/batch.ttl">
+        <span class="card-tag tag-vocab">Ontología</span>
+        <div class="card-title">Dataset tipo — Lote porcino</div>
+        <div class="card-desc">Definición OWL/RDFS de <code>pig:Batch</code> y sus propiedades. Clase base para todos los datasets de tipo lote.</div>
+        <div class="card-uri"><span>vocab/pig/</span>batch.ttl</div>
+      </a>
+    </div>
+
+    <p class="section-label">Perfiles DCAT</p>
+    <div class="artifact-grid">
+      <a class="artifact-card" href="profiles/batch/1.0.0/profile.ttl">
+        <span class="card-tag tag-profile">Perfil normativo</span>
+        <div class="card-title">Perfil DCAT · Lote</div>
+        <div class="card-desc">Especificación normativa de los metadatos requeridos para publicar un dataset de tipo lote en el catálogo.</div>
+        <div class="card-uri"><span>profiles/batch/1.0.0/</span>profile.ttl</div>
+      </a>
+      <a class="artifact-card" href="profiles/batch/1.0.0/shacl.ttl">
+        <span class="card-tag tag-profile">Validador DCAT</span>
+        <div class="card-title">SHACL descriptor · Lote</div>
+        <div class="card-desc">Shapes ejecutables para validar el descriptor DCAT antes de registrarlo en el catálogo EDC.</div>
+        <div class="card-uri"><span>profiles/batch/1.0.0/</span>shacl.ttl</div>
+      </a>
+    </div>
+
+    <p class="section-label">Validadores de payload</p>
+    <div class="artifact-grid">
+      <a class="artifact-card" href="shapes/batch/batch.ttl">
+        <span class="card-tag tag-shape">SHACL payload</span>
+        <div class="card-title">SHACL payload · Lote</div>
+        <div class="card-desc">Shapes para validar registros <code>pig:Batch</code> reales. Incluye restricciones cruzadas de fechas y coherencia de pesos.</div>
+        <div class="card-uri"><span>shapes/batch/</span>batch.ttl</div>
+      </a>
+    </div>
+
+    <p class="section-label">Pipeline de validación</p>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Proveedor</div>
+        <div class="step-desc">Valida su payload contra <code>shapes/batch/batch.ttl</code> antes de publicar.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Catálogo</div>
+        <div class="step-desc">Valida el descriptor DCAT contra <code>profiles/batch/1.0.0/shacl.ttl</code> al registrar.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Consumidor</div>
+        <div class="step-desc">Revalida los datos recibidos contra el shape del payload.</div>
+      </div>
+    </div>
+
+    <p class="section-label">Herramienta de validación local</p>
+    <div class="validation-box">
+      <h3>validate.py — CLI pySHACL</h3>
+      <p>Script de línea de comandos para ejecutar las validaciones localmente. Requiere Python 3.8+ y pyshacl.</p>
+      <div class="code-block">
+        <code>
+<span class="comment"># Instalar dependencia</span><br>
+<span class="cmd">pip install pyshacl --extra-index-url https://pypi.org/simple/</span><br><br>
+<span class="comment"># Validar descriptor DCAT</span><br>
+<span class="cmd">python validate.py --mode dcat --data descriptor-dcat-lote.ttl</span><br><br>
+<span class="comment"># Validar payload de lotes</span><br>
+<span class="cmd">python validate.py --mode payload --data mi-payload.ttl</span><br><br>
+<span class="comment"># Modo silencioso para CI/CD (exit code 0 = conforme)</span><br>
+<span class="cmd">python validate.py --mode payload --data mi-payload.ttl --quiet</span>
+        </code>
+      </div>
+      <a class="artifact-card" href="tools/validate.py">
+        <span class="card-tag tag-tool">Herramienta</span>
+        <div class="card-title">validate.py</div>
+        <div class="card-desc">Descarga el script y colócalo junto a shacl-dcat-lote.ttl y shacl-payload-lote.ttl.</div>
+        <div class="card-uri"><span>tools/</span>validate.py</div>
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span class="footer-left">ESPORDATA · Pork Data Space · v1.0.0</span>
+      <div class="footer-links">
+        <a href="https://github.com/jgarciad-hiberus/espordata">GitHub</a>
+        <a href="vocab/pig/batch.ttl">Vocabulario</a>
+        <a href="profiles/batch/1.0.0/profile.ttl">Perfil DCAT</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
