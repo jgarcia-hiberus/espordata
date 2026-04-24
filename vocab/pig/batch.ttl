@@ -1,9 +1,33 @@
-@prefix pig: <https://espordata.eu/vocab/pig#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pig:  <https://github.com/jgarcia-hiberus/espordata/blob/main/vocab/pig/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix s4agri: <https://saref.etsi.org/saref4agri/> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cc:   <http://creativecommons.org/ns#> .
+
+# ========================================
+# ONTOLOGY METADATA
+# ========================================
+
+<https://espordata.eu/vocab/pig> a owl:Ontology ;
+    dct:title "ESPORDATA Pig Batch Ontology"@en ;
+    dct:title "Ontología ESPORDATA de Lotes Porcinos"@es ;
+    dct:description "Vocabulary describing pig batches (homogeneous groups of animals sharing a production cycle) in the context of the ESPORDATA data space for the Spanish porcine sector."@en ;
+    dct:description "Vocabulario que describe lotes porcinos (grupos homogéneos de animales que comparten ciclo productivo) en el contexto del data space ESPORDATA para el sector porcino español."@es ;
+    dct:creator [ foaf:name "Jose Manuel Garcia de la Cuadra Nacher"; foaf:mbox <mailto:jgarciad@hiberus.com> ] ;
+    dct:publisher [ foaf:name "Hiberus" ; foaf:homepage <https://www.hiberus.com/> ] ;
+    dct:created "2025-11-01"^^xsd:date ;
+    dct:modified "2026-04-22"^^xsd:date ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "1.0.0" ;
+    owl:versionIRI <https://github.com/jgarcia-hiberus/espordata/tree/main/vocab/pig> ;
+    vann:preferredNamespaceUri "https://github.com/jgarcia-hiberus/espordata/tree/main/vocab/pig" ;
+    vann:preferredNamespacePrefix "pig" ;
+    rdfs:seeAlso <https://espordata.eu/> .
 
 # ========================================
 # LOTES (BATCHES)
