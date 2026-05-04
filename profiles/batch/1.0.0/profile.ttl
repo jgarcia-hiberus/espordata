@@ -44,16 +44,22 @@ esp:1.0.0
 #  Propiedades OBLIGATORIAS para dcat:Dataset
 # ─────────────────────────────────────────────────────────
 
-esp:mandatory-title a rdf:Property ;
-    rdfs:label          "Título obligatorio"@es ;
-    rdfs:comment        "dct:title. Título del Dataset. Mínimo 1."@es ;
+esp:title a rdf:Property ;
+    rdfs:label          "Título"@es ;
+    rdfs:comment        """
+        dct:title. Título del Dataset.
+        Rango: rdfs:Literal. Cardinalidad: 1..n.
+    """@es ;
     rdfs:domain         dcat:Dataset ;
     rdfs:range          rdfs:Literal ;
     owl:minCardinality  1 .
 
-esp:mandatory-description a rdf:Property ;
-    rdfs:label          "Descripción obligatoria"@es ;
-    rdfs:comment        "dct:description. Descripción del Dataset. Mínimo 1."@es ;
+esp:description a rdf:Property ;
+    rdfs:label          "Descripción"@es ;
+    rdfs:comment        """
+        dct:description. Descripción libre del Dataset.
+        Rango: rdfs:Literal. Cardinalidad: 1..n.
+    """@es ;
     rdfs:domain         dcat:Dataset ;
     rdfs:range          rdfs:Literal ;
     owl:minCardinality  1 .
@@ -62,25 +68,37 @@ esp:mandatory-description a rdf:Property ;
 #  Propiedades RECOMENDADAS para dcat:Dataset
 # ─────────────────────────────────────────────────────────
 
-esp:rec-contactPoint a rdf:Property ;
+esp:contactPoint a rdf:Property ;
     rdfs:label      "Punto de contacto"@es ;
     rdfs:comment    """
         dcat:contactPoint. Información de contacto para enviar comentarios
-        sobre el dataset. Rango: vcard:Kind. Cardinalidad: 0..n.
+        sobre el dataset.
+        Rango: vcard:Kind. Cardinalidad: 0..n.
     """@es ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      vcard:Kind .
 
-esp:rec-distribution a rdf:Property ;
+esp:distribution a rdf:Property ;
     rdfs:label      "Distribución del dataset"@es ;
     rdfs:comment    """
         dcat:distribution. Distribución disponible del dataset
-        (csv, json, etc.). Rango: dcat:Distribution. Cardinalidad: 0..n.
+        (csv, json, ttl, etc.).
+        Rango: dcat:Distribution. Cardinalidad: 0..n.
     """@es ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      dcat:Distribution .
 
-esp:rec-publisher a rdf:Property ;
+esp:keyword a rdf:Property ;
+    rdfs:label      "Palabra clave"@es ;
+    rdfs:comment    """
+        dcat:keyword. Palabra o etiqueta que describe el dataset, útil
+        para indexación y búsqueda en el catálogo.
+        Rango: rdfs:Literal. Cardinalidad: 0..n.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      rdfs:Literal .
+
+esp:publisher a rdf:Property ;
     rdfs:label      "Publisher"@es ;
     rdfs:comment    """
         dct:publisher. Entidad responsable de disponibilizar el dataset.
@@ -90,7 +108,7 @@ esp:rec-publisher a rdf:Property ;
     rdfs:range      foaf:Agent ;
     owl:maxCardinality 1 .
 
-esp:rec-spatial a rdf:Property ;
+esp:spatial a rdf:Property ;
     rdfs:label      "Cobertura geográfica"@es ;
     rdfs:comment    """
         dct:spatial. Región geográfica que cubre el dataset.
@@ -99,7 +117,7 @@ esp:rec-spatial a rdf:Property ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      dct:Location .
 
-esp:rec-temporal a rdf:Property ;
+esp:temporal a rdf:Property ;
     rdfs:label      "Cobertura temporal"@es ;
     rdfs:comment    """
         dct:temporal. Periodo temporal que cubre el dataset.
@@ -108,10 +126,11 @@ esp:rec-temporal a rdf:Property ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      dct:PeriodOfTime .
 
-esp:rec-theme a rdf:Property ;
+esp:theme a rdf:Property ;
     rdfs:label      "Tema o categoría"@es ;
     rdfs:comment    """
-        dcat:theme (subpropiedad de dct:subject). Tema o categoría del dataset.
+        dcat:theme (subpropiedad de dct:subject). Tema o categoría del dataset,
+        idealmente tomado de un vocabulario controlado (p. ej. EU data themes).
         Rango: skos:Concept. Cardinalidad: 0..n.
     """@es ;
     rdfs:domain     dcat:Dataset ;
@@ -121,26 +140,28 @@ esp:rec-theme a rdf:Property ;
 #  Propiedades OPCIONALES para dcat:Dataset
 # ─────────────────────────────────────────────────────────
 
-esp:opt-modified a rdf:Property ;
-    rdfs:label      "Fecha de modificación"@es ;
+esp:creator a rdf:Property ;
+    rdfs:label      "Creador"@es ;
     rdfs:comment    """
-        dct:modified. Fecha más reciente en que el dataset ha sido
-        cambiado o modificado. Rango: xsd:date o xsd:dateTime. Cardinalidad: 0..1.
+        dct:creator. Entidad responsable de la creación del dataset.
+        A diferencia de dct:publisher, identifica al autor original
+        de los datos, no a quien los disponibiliza.
+        Rango: foaf:Agent. Cardinalidad: 0..n.
     """@es ;
     rdfs:domain     dcat:Dataset ;
-    rdfs:range      [ owl:unionOf ( xsd:date xsd:dateTime ) ] ;
-    owl:maxCardinality 1 .
+    rdfs:range      foaf:Agent .
 
-esp:opt-identifier a rdf:Property ;
+esp:identifier a rdf:Property ;
     rdfs:label      "Identificador"@es ;
     rdfs:comment    """
         dct:identifier. Identificador para el dataset: URI u otro identificador
-        único en el contexto del catálogo. Rango: rdfs:Literal. Cardinalidad: 0..n.
+        único en el contexto del catálogo.
+        Rango: rdfs:Literal. Cardinalidad: 0..n.
     """@es ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      rdfs:Literal .
 
-esp:opt-accrualPeriodicity a rdf:Property ;
+esp:accrualPeriodicity a rdf:Property ;
     rdfs:label      "Frecuencia de actualización"@es ;
     rdfs:comment    """
         dct:accrualPeriodicity. Frecuencia con la que se actualiza el dataset.
@@ -148,4 +169,48 @@ esp:opt-accrualPeriodicity a rdf:Property ;
     """@es ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      dct:Frequency ;
+    owl:maxCardinality 1 .
+
+esp:language a rdf:Property ;
+    rdfs:label      "Idioma"@es ;
+    rdfs:comment    """
+        dct:language. Idioma o idiomas del dataset. Se recomienda usar
+        códigos del Authority Table 'Languages NAL' del Publications Office UE
+        (p. ej. http://publications.europa.eu/resource/authority/language/SPA).
+        Rango: dct:LinguisticSystem. Cardinalidad: 0..n.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      dct:LinguisticSystem .
+
+esp:modified a rdf:Property ;
+    rdfs:label      "Fecha de modificación"@es ;
+    rdfs:comment    """
+        dct:modified. Fecha más reciente en que el dataset ha sido
+        cambiado o modificado.
+        Rango: xsd:date o xsd:dateTime. Cardinalidad: 0..1.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      [ owl:unionOf ( xsd:date xsd:dateTime ) ] ;
+    owl:maxCardinality 1 .
+
+esp:hasVersion a rdf:Property ;
+    rdfs:label      "Tiene versión"@es ;
+    rdfs:comment    """
+        dct:hasVersion. Enlaza este dataset a otro dataset que es una versión,
+        edición o adaptación del mismo (p. ej. lotes derivados, snapshots).
+        Rango: dcat:Dataset. Cardinalidad: 0..n.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      dcat:Dataset .
+
+esp:versionInfo a rdf:Property ;
+    rdfs:label      "Información de versión"@es ;
+    rdfs:comment    """
+        owl:versionInfo. Identificador de versión del dataset
+        (p. ej. '1.0.0', '2025-Q1'). Es metadato textual de versión,
+        no un enlace a otra versión (eso es dct:hasVersion).
+        Rango: rdfs:Literal. Cardinalidad: 0..1.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      rdfs:Literal ;
     owl:maxCardinality 1 .
