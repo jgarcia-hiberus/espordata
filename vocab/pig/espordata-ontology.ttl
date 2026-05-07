@@ -1,0 +1,1118 @@
+@prefix : <https://espordata.es/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@base <https://espordata.es/ontology/> .
+
+#################################################################
+# ESPORDATA ONTOLOGY
+# Unified 4-layer ontology for the Spanish porcine data space
+#
+# Layer 1 - Functional Business Domains (SKOS)
+# Layer 2 - Core Domain Model (OWL)
+# Layer 3 - Properties Model (OWL + skos:notation)
+# Layer 4 - Controlled Vocabularies (SKOS)
+#################################################################
+
+<https://espordata.es/ontology/> rdf:type owl:Ontology ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> ;
+    dct:title "ESPORDATA Ontology"@en ,
+              "Ontología ESPORDATA"@es ;
+    dct:description "Ontología unificada del espacio de datos ESPORDATA para el sector porcino español. Modela los dominios funcionales de negocio, las clases de dominio (animal, lote, sanidad, alimentación, reproducción, controles), sus propiedades y los vocabularios controlados alineados con los catálogos oficiales SITRAN/SIEX/FEGA."@es ;
+    dct:creator [ foaf:name "Jose Manuel García de la Cuadra Nacher" ;
+                  foaf:mbox <mailto:jgarcia@hiberus.com> ] ;
+    dct:publisher [ foaf:name "Hiberus / ESPORDATA" ;
+                    foaf:homepage <https://espordata.es/> ] ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dct:issued "2025-01-15"^^xsd:date ;
+    dct:modified "2026-05-07"^^xsd:date ;
+    owl:versionInfo "1.0.0" ;
+    owl:versionIRI <https://espordata.es/ontology/1.0.0/> ;
+    vann:preferredNamespacePrefix "esp" ;
+    vann:preferredNamespaceUri "https://espordata.es/ontology/" ;
+    rdfs:seeAlso <https://www3.sede.fega.gob.es/bdcsixpor/catalogos> ,
+                 <https://servicio.mapa.gob.es/regega/> .
+
+
+#################################################################
+# Annotation properties
+#################################################################
+
+skos:definition     rdf:type owl:AnnotationProperty .
+skos:inScheme       rdf:type owl:AnnotationProperty .
+skos:notation       rdf:type owl:AnnotationProperty .
+skos:prefLabel      rdf:type owl:AnnotationProperty .
+skos:topConceptOf   rdf:type owl:AnnotationProperty .
+skos:broader        rdf:type owl:AnnotationProperty .
+skos:related        rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#################################################################
+##                                                             ##
+##  LAYER 1 - FUNCTIONAL BUSINESS DOMAINS (SKOS)               ##
+##                                                             ##
+#################################################################
+#################################################################
+
+:EspordataBusinessDomains rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Espordata Functional Business Domains"@en ;
+    skos:prefLabel "Dominios Funcionales de Negocio Espordata"@es ;
+    rdfs:comment "Taxonomía funcional de dominios de negocio del espacio de datos Espordata."@es .
+
+:DP0001 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0001" ;
+    skos:prefLabel "Producción animal"@es , "Animal Production"@en ;
+    skos:definition "Dominio que engloba los datos relativos al ciclo productivo de los animales, incluyendo rendimientos, crecimientos y parámetros de seguimiento de la producción en granja."@es .
+
+:DP0002 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0002" ;
+    skos:prefLabel "Sanidad Animal"@es , "Animal Health"@en ;
+    skos:definition "Dominio que recoge la información sobre el estado sanitario de los animales, tratamientos veterinarios, incidencias y protocolos de prevención y control de enfermedades."@es .
+
+:DP0003 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0003" ;
+    skos:prefLabel "Alimentación"@es , "Animal Feeding"@en ;
+    skos:definition "Dominio que gestiona los datos relacionados con la nutrición animal, incluyendo composición de piensos, planes de alimentación y consumos por lote o explotación."@es .
+
+:DP0004 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0004" ;
+    skos:prefLabel "Trazabilidad y Movimientos"@es , "Traceability and Animal Movements"@en ;
+    skos:definition "Dominio que centraliza la información sobre el seguimiento y localización de los animales a lo largo de toda la cadena, registrando entradas, salidas y traslados entre instalaciones."@es .
+
+:DP0005 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0005" ;
+    skos:prefLabel "Explotación / Infraestructura"@es , "Farm Infrastructure"@en ;
+    skos:definition "Dominio que recoge los datos descriptivos y operativos de las instalaciones productivas, incluyendo características físicas, capacidades y equipamiento disponible."@es .
+
+:DP0006 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0006" ;
+    skos:prefLabel "Bienestar Animal"@es , "Animal Welfare"@en ;
+    skos:definition "Dominio que documenta los indicadores y registros relacionados con las condiciones de vida de los animales, velando por el cumplimiento de los estándares de bienestar establecidos."@es .
+
+:DP0007 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0007" ;
+    skos:prefLabel "Producción Agregada y KPIs"@es , "Aggregated Production and KPIs"@en ;
+    skos:definition "Dominio que consolida los datos de producción a nivel agregado, proporcionando los indicadores clave de rendimiento necesarios para la toma de decisiones estratégicas."@es .
+
+:DP0008 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0008" ;
+    skos:prefLabel "Matadero y Procesado"@es , "Slaughterhouse and Processing"@en ;
+    skos:definition "Dominio que gestiona la información relativa a los procesos de sacrificio, faenado y transformación del producto, incluyendo rendimientos de canal y control de calidad en planta."@es .
+
+:DP0009 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0009" ;
+    skos:prefLabel "Comercialización"@es , "Commercialization"@en ;
+    skos:definition "Dominio que recoge los datos vinculados a la venta y distribución del producto, incluyendo precios, clientes, contratos y condiciones comerciales."@es .
+
+:DP0010 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0010" ;
+    skos:prefLabel "Medio Ambiente y Sostenibilidad"@es , "Environment and Sustainability"@en ;
+    skos:definition "Dominio que centraliza los datos relacionados con el impacto ambiental de la actividad productiva, incluyendo emisiones, gestión de residuos y métricas de sostenibilidad."@es .
+
+:DP0011 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0011" ;
+    skos:prefLabel "Cumplimiento Normativo"@es , "Regulatory Compliance"@en ;
+    skos:definition "Dominio que agrupa la información necesaria para acreditar el cumplimiento de la legislación vigente aplicable a la actividad, incluyendo registros, certificaciones y auditorías."@es .
+
+:DP0012 rdf:type skos:Concept ;
+    skos:inScheme :EspordataBusinessDomains ;
+    skos:notation "DP0012" ;
+    skos:prefLabel "Bioseguridad"@es , "Biosecurity"@en ;
+    skos:definition "Dominio que documenta los protocolos, medidas y registros orientados a prevenir la entrada y propagación de agentes patógenos en las instalaciones productivas."@es .
+
+
+#################################################################
+#################################################################
+##                                                             ##
+##  LAYER 2 - CORE DOMAIN MODEL (OWL)                          ##
+##                                                             ##
+##  Classes with owl:Restriction + qualifiedCardinality        ##
+##  Following the Agrixels pattern (mandatory vs optional)     ##
+##                                                             ##
+#################################################################
+#################################################################
+
+#################################################################
+# ANIMAL PRODUCTION DOMAIN - DP0001
+#################################################################
+
+:Animal rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :animalIdentifier ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:string
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :birthDate ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:date
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :animalAge ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:integer
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :animalWeight ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:decimal
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :belongsToBatch ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass :Batch
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasSpecies ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :animalBreed ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :animalSex ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Animales porcinos"@es , "Pigs"@en ;
+    rdfs:comment "Conjunto de cerdos que forman parte del sistema productivo porcino, clasificados según su edad, sexo y especie."@es ;
+    dct:subject :DP0001 .
+
+:Batch rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :batchIdentifier ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:string
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :numberOfAnimals ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:integer
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :batchEntryDate ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:date
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :slaughterDate ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:date
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :totalWeight ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:decimal
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :averageWeight ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:decimal
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :batchBreed ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :belongsToFarm ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Lotes"@es , "Batches"@en ;
+    rdfs:comment "Conjunto de cerdos que se agrupan dentro de una explotación porcina."@es ;
+    dct:subject :DP0001 .
+
+:PorcineReproduction rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :reproductiveSex ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasReproductionMethod ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasReproductiveStatus ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasReproductionResult ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Reproducción porcina"@es , "Porcine Reproduction"@en ;
+    rdfs:comment "Proceso biológico y manejo técnico mediante el cual se obtienen nuevas crías en la granja porcina, incluyendo actividades como la monta o inseminación, gestación, parto y lactancia."@es ;
+    dct:subject :DP0001 .
+
+
+#################################################################
+# ANIMAL HEALTH DOMAIN - DP0002
+#################################################################
+
+:ControlPoint rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasControlType ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :controlFrequency ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :controlResponsible ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :controlStatus ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Puntos de control porcino"@es , "Control Points"@en ;
+    rdfs:comment "Procesos específicos dentro de la explotación porcina donde se realizan mediciones, inspecciones o registros sistemáticos con el fin de monitorear, evaluar y asegurar el correcto funcionamiento de la producción."@es ;
+    dct:subject :DP0002 .
+
+:VeterinaryTreatment rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :diagnosedDisease ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasTreatmentType ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasMedication ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasActiveIngredient ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Tratamientos veterinarios porcinos"@es , "Veterinary Treatments"@en ;
+    rdfs:comment "Conjunto de intervenciones médicas, preventivas y terapéuticas aplicadas a los cerdos con el objetivo de prevenir, controlar o curar enfermedades."@es ;
+    dct:subject :DP0002 .
+
+:Vaccination rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasVaccine ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :preventsDisease ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Vacunaciones porcinas"@es , "Vaccinations"@en ;
+    rdfs:comment "Conjunto de acciones preventivas mediante la administración de vacunas a los cerdos para protegerlos frente a enfermedades infecciosas."@es ;
+    dct:subject :DP0002 .
+
+:AnimalLoss rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :mortalityCause ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:string
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Bajas porcinas"@es , "Animal Losses"@en ;
+    rdfs:comment "Registro de los animales que salen del sistema productivo debido a muerte, sacrificio sanitario o eliminación."@es ;
+    dct:subject :DP0002 .
+
+
+#################################################################
+# FEEDING DOMAIN - DP0003
+#################################################################
+
+:FeedEntry rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :feedQuantity ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onDataRange xsd:decimal
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :feedType ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Entradas de pienso porcino"@es , "Feed Entries"@en ;
+    rdfs:comment "Registro de los ingresos o recepciones de alimento en la explotación porcina."@es ;
+    dct:subject :DP0003 .
+
+:FeedingPhase rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :feedingPhaseFeedType ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Fases de alimentación porcino"@es , "Feeding Phases"@en ;
+    rdfs:comment "Conjunto de etapas nutricionales en las que se divide la alimentación de los cerdos según su edad, peso y estado fisiológico."@es ;
+    dct:subject :DP0003 .
+
+:FeedFormula rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasIngredient ;
+          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasAminoAcid ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasMineral ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasVitamin ;
+          owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Fórmulas de pienso porcino"@es , "Feed Formulas"@en ;
+    rdfs:comment "Combinaciones específicas de ingredientes y nutrientes diseñadas para elaborar el alimento de los cerdos."@es ;
+    dct:subject :DP0003 .
+
+:FeedConversion rdf:type owl:Class ;
+    rdfs:subClassOf
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasProductionStage ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :usesFeedFormula ;
+          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ,
+        [ rdf:type owl:Restriction ;
+          owl:onProperty :hasGeneticLine ;
+          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+          owl:onClass skos:Concept
+        ] ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Conversión teórica porcina"@es , "Theoretical Feed Conversion"@en ;
+    rdfs:comment "Indicador productivo que estima la cantidad de alimento necesaria para ganar una unidad de peso vivo."@es ;
+    dct:subject :DP0003 .
+
+
+#################################################################
+#################################################################
+##                                                             ##
+##  LAYER 3 - PROPERTIES MODEL                                 ##
+##                                                             ##
+##  Hierarchical properties (subPropertyOf) with skos:notation ##
+##  AP0001..AP0147 = stable opaque identifiers                 ##
+##                                                             ##
+#################################################################
+#################################################################
+
+#################################################################
+# COMMON IDENTIFIERS
+#################################################################
+
+:identifier rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "identifier"@en , "identificador"@es ;
+    rdfs:comment "Identificador único de una entidad."@es .
+
+:animalIdentifier rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:domain :Animal ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Identificador de animal"@es ;
+    skos:notation "AP0001" .
+
+:batchIdentifier rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :identifier ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Identificador de lote"@es ;
+    skos:notation "AP0008" .
+
+#################################################################
+# DATES
+#################################################################
+
+:hasDate rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:date ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has date"@en , "tiene fecha"@es .
+
+:birthDate rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasDate ;
+    rdfs:domain :Animal ;
+    rdfs:range xsd:date ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Fecha de nacimiento"@es ;
+    skos:notation "AP0002" .
+
+:batchEntryDate rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasDate ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:date ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Fecha de entrada del lote"@es ;
+    skos:notation "AP0010" .
+
+:slaughterDate rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasDate ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:date ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Fecha de sacrificio"@es ;
+    skos:notation "AP0011" .
+
+#################################################################
+# NUMERIC PROPERTIES
+#################################################################
+
+:hasNumericValue rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has numeric value"@en .
+
+:animalAge rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :Animal ;
+    rdfs:range xsd:integer ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Edad del animal"@es ;
+    skos:notation "AP0006" .
+
+:animalWeight rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :Animal ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Peso del animal"@es .
+
+:numberOfAnimals rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:integer ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Número de animales"@es ;
+    skos:notation "AP0013" .
+
+:totalWeight rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Peso total del lote"@es ;
+    skos:notation "AP0015" .
+
+:averageWeight rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :Batch ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Peso medio del lote"@es ;
+    skos:notation "AP0016" .
+
+:feedQuantity rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf :hasNumericValue ;
+    rdfs:domain :FeedEntry ;
+    rdfs:range xsd:decimal ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Cantidad de pienso"@es .
+
+#################################################################
+# DESCRIPTIVE TEXT
+#################################################################
+
+:description rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "description"@en , "descripción"@es .
+
+:observations rdf:type owl:DatatypeProperty ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "observations"@en , "observaciones"@es .
+
+:mortalityCause rdf:type owl:DatatypeProperty ;
+    rdfs:domain :AnimalLoss ;
+    rdfs:range xsd:string ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "Causa de baja"@es .
+
+#################################################################
+# CORE DOMAIN OBJECT PROPERTIES
+#################################################################
+
+:belongsToBatch rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range :Batch ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "belongs to batch"@en ;
+    rdfs:comment "Relación entre un animal y el lote al que pertenece."@es .
+
+:hasVaccination rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range :Vaccination ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has vaccination"@en .
+
+:hasVeterinaryTreatment rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range :VeterinaryTreatment ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has veterinary treatment"@en .
+
+:hasFeedingPhase rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range :FeedingPhase ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has feeding phase"@en .
+
+:consumesFeedFormula rdf:type owl:ObjectProperty ;
+    rdfs:domain :Batch ;
+    rdfs:range :FeedFormula ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "consumes feed formula"@en .
+
+:hasControlPoint rdf:type owl:ObjectProperty ;
+    rdfs:domain :Batch ;
+    rdfs:range :ControlPoint ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has control point"@en .
+
+#################################################################
+# CONTROLLED VOCABULARY RELATIONSHIPS
+#################################################################
+
+:hasSpecies rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has species"@en ;
+    skos:notation "AP0003" .
+
+:hasBreed rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has breed"@en , "tiene raza"@es .
+
+:animalBreed rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasBreed ;
+    rdfs:domain :Animal ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0004" .
+
+:batchBreed rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasBreed ;
+    rdfs:domain :Batch ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0012" .
+
+:hasSex rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has sex"@en , "tiene sexo"@es .
+
+:animalSex rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasSex ;
+    rdfs:domain :Animal ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0005" .
+
+:reproductiveSex rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasSex ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0019" .
+
+:hasAnimalType rdf:type owl:ObjectProperty ;
+    rdfs:domain :Animal ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0007" .
+
+#################################################################
+# FARM / EXPLOITATION
+#################################################################
+
+:belongsToFarm rdf:type owl:ObjectProperty ;
+    rdfs:domain :Batch ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "belongs to farm"@en ;
+    skos:notation "AP0014" .
+
+#################################################################
+# DOCUMENTATION
+#################################################################
+
+:hasDocumentation rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has documentation"@en .
+
+:batchDocumentation rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasDocumentation ;
+    rdfs:domain :Batch ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0017" .
+
+#################################################################
+# REPRODUCTION
+#################################################################
+
+:hasGenetics rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0022" .
+
+:hasCycle rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0023" .
+
+:hasReproductionMethod rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0025" .
+
+:hasReproductiveStatus rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0026" .
+
+:hasMatingType rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0031" .
+
+:hasReproductionResult rdf:type owl:ObjectProperty ;
+    rdfs:domain :PorcineReproduction ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0033" .
+
+#################################################################
+# CONTROL POINTS
+#################################################################
+
+:hasControlType rdf:type owl:ObjectProperty ;
+    rdfs:domain :ControlPoint ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0041" .
+
+:hasFrequency rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has frequency"@en .
+
+:controlFrequency rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasFrequency ;
+    rdfs:domain :ControlPoint ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0043" .
+
+:hasResponsibleAgent rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has responsible agent"@en .
+
+:controlResponsible rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasResponsibleAgent ;
+    rdfs:domain :ControlPoint ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0044" .
+
+:hasStatus rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    rdfs:label "has status"@en .
+
+:controlStatus rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasStatus ;
+    rdfs:domain :ControlPoint ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0048" .
+
+#################################################################
+# VETERINARY TREATMENTS
+#################################################################
+
+:hasDisease rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> .
+
+:diagnosedDisease rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasDisease ;
+    rdfs:domain :VeterinaryTreatment ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0053" .
+
+:hasTreatmentType rdf:type owl:ObjectProperty ;
+    rdfs:domain :VeterinaryTreatment ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0054" .
+
+:hasMedication rdf:type owl:ObjectProperty ;
+    rdfs:domain :VeterinaryTreatment ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0055" .
+
+:hasActiveIngredient rdf:type owl:ObjectProperty ;
+    rdfs:domain :VeterinaryTreatment ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0056" .
+
+#################################################################
+# VACCINATION
+#################################################################
+
+:hasVaccine rdf:type owl:ObjectProperty ;
+    rdfs:domain :Vaccination ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0072" .
+
+:preventsDisease rdf:type owl:ObjectProperty ;
+    rdfs:domain :Vaccination ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0073" .
+
+#################################################################
+# FEEDING
+#################################################################
+
+:hasFeedType rdf:type owl:ObjectProperty ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> .
+
+:feedType rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasFeedType ;
+    rdfs:domain :FeedEntry ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0103" .
+
+:feedingPhaseFeedType rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf :hasFeedType ;
+    rdfs:domain :FeedingPhase ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0123" .
+
+#################################################################
+# FEED FORMULA
+#################################################################
+
+:hasIngredient rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedFormula ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0130" .
+
+:hasAminoAcid rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedFormula ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0133" .
+
+:hasMineral rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedFormula ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0134" .
+
+:hasVitamin rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedFormula ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0135" .
+
+#################################################################
+# THEORETICAL CONVERSION
+#################################################################
+
+:hasProductionStage rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedConversion ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0140" .
+
+:usesFeedFormula rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedConversion ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0146" .
+
+:hasGeneticLine rdf:type owl:ObjectProperty ;
+    rdfs:domain :FeedConversion ;
+    rdfs:range skos:Concept ;
+    rdfs:isDefinedBy <https://espordata.es/ontology/> ;
+    skos:notation "AP0147" .
+
+
+#################################################################
+#################################################################
+##                                                             ##
+##  LAYER 4 - CONTROLLED VOCABULARIES (SKOS)                   ##
+##                                                             ##
+##  Aligned with FEGA / SIEX / SITRAN catalogues               ##
+##                                                             ##
+#################################################################
+#################################################################
+
+#################################################################
+# SPECIES ANIMALS - Fuente: FEGA / SIEX
+#################################################################
+
+:SpeciesScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Catálogo de especies animales"@es ;
+    rdfs:seeAlso <https://www3.sede.fega.gob.es/bdcsixpor/catalogos> .
+
+:PorcineFamily rdf:type skos:Concept ;
+    skos:inScheme :SpeciesScheme ;
+    skos:prefLabel "Porcino"@es .
+
+:Species_2 rdf:type skos:Concept ;
+    skos:inScheme :SpeciesScheme ;
+    skos:notation "2" ;
+    skos:prefLabel "Cerdos"@es ;
+    skos:broader :PorcineFamily ;
+    skos:topConceptOf :SpeciesScheme .
+
+#################################################################
+# FARM TYPE
+#################################################################
+
+:FarmTypeScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Catálogo de tipos de explotación ganadera"@es .
+
+:FarmType_0 rdf:type skos:Concept ;
+    skos:inScheme :FarmTypeScheme ;
+    skos:notation "0" ;
+    skos:prefLabel "Producción y reproducción"@es ;
+    skos:topConceptOf :FarmTypeScheme .
+
+:FarmType_1 rdf:type skos:Concept ;
+    skos:inScheme :FarmTypeScheme ;
+    skos:notation "1" ;
+    skos:prefLabel "Tratante u operador comercial"@es ;
+    skos:topConceptOf :FarmTypeScheme .
+
+:FarmType_2 rdf:type skos:Concept ;
+    skos:inScheme :FarmTypeScheme ;
+    skos:notation "2" ;
+    skos:prefLabel "Centro de Testaje y/o selección y/o reproducción animal"@es ;
+    skos:topConceptOf :FarmTypeScheme .
+
+#################################################################
+# ZOOTECHNICAL CLASSIFICATION
+#################################################################
+
+:ZootechnicalClassificationScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Clasificación zootécnica"@es .
+
+:ZooClass_1 rdf:type skos:Concept ;
+    skos:inScheme :ZootechnicalClassificationScheme ;
+    skos:notation "1" ;
+    skos:prefLabel "Cebo o Cebadero"@es ;
+    skos:topConceptOf :ZootechnicalClassificationScheme .
+
+:ZooClass_2 rdf:type skos:Concept ;
+    skos:inScheme :ZootechnicalClassificationScheme ;
+    skos:notation "2" ;
+    skos:prefLabel "Reproducción para producción de leche"@es ;
+    skos:topConceptOf :ZootechnicalClassificationScheme .
+
+#################################################################
+# PRODUCTION SYSTEM
+#################################################################
+
+:ProductionSystemScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Sistema productivo"@es .
+
+:ProductionSystem_0 rdf:type skos:Concept ;
+    skos:inScheme :ProductionSystemScheme ;
+    skos:notation "0" ;
+    skos:prefLabel "Intensivo"@es ;
+    skos:topConceptOf :ProductionSystemScheme .
+
+:ProductionSystem_1 rdf:type skos:Concept ;
+    skos:inScheme :ProductionSystemScheme ;
+    skos:notation "1" ;
+    skos:prefLabel "Extensivo"@es ;
+    skos:topConceptOf :ProductionSystemScheme .
+
+:ProductionSystem_2 rdf:type skos:Concept ;
+    skos:inScheme :ProductionSystemScheme ;
+    skos:notation "2" ;
+    skos:prefLabel "Mixto"@es ;
+    skos:topConceptOf :ProductionSystemScheme .
+
+#################################################################
+# LOCATION TYPE
+#################################################################
+
+:LocationTypeScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Tipo de ubicación"@es .
+
+:LocationType_0 rdf:type skos:Concept ;
+    skos:inScheme :LocationTypeScheme ;
+    skos:notation "0" ;
+    skos:prefLabel "Principal"@es ;
+    skos:topConceptOf :LocationTypeScheme .
+
+:LocationType_1 rdf:type skos:Concept ;
+    skos:inScheme :LocationTypeScheme ;
+    skos:notation "1" ;
+    skos:prefLabel "Secundaria"@es ;
+    skos:topConceptOf :LocationTypeScheme .
+
+#################################################################
+# FARM STATUS
+#################################################################
+
+:FarmStatusScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Estado de explotación"@es .
+
+:FarmStatus_0 rdf:type skos:Concept ;
+    skos:inScheme :FarmStatusScheme ;
+    skos:notation "0" ;
+    skos:prefLabel "Alta"@es ;
+    skos:topConceptOf :FarmStatusScheme .
+
+:FarmStatus_1 rdf:type skos:Concept ;
+    skos:inScheme :FarmStatusScheme ;
+    skos:notation "1" ;
+    skos:prefLabel "Baja"@es ;
+    skos:topConceptOf :FarmStatusScheme .
+
+:FarmStatus_2 rdf:type skos:Concept ;
+    skos:inScheme :FarmStatusScheme ;
+    skos:notation "2" ;
+    skos:prefLabel "Inactiva"@es ;
+    skos:topConceptOf :FarmStatusScheme .
+
+#################################################################
+# ANIMAL SEX - Valores conocidos del sector
+#################################################################
+
+:AnimalSexScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Sexo del animal"@es .
+
+:AnimalSex_M rdf:type skos:Concept ;
+    skos:inScheme :AnimalSexScheme ;
+    skos:notation "M" ;
+    skos:prefLabel "Macho"@es ;
+    skos:topConceptOf :AnimalSexScheme .
+
+:AnimalSex_H rdf:type skos:Concept ;
+    skos:inScheme :AnimalSexScheme ;
+    skos:notation "H" ;
+    skos:prefLabel "Hembra"@es ;
+    skos:topConceptOf :AnimalSexScheme .
+
+:AnimalSex_C rdf:type skos:Concept ;
+    skos:inScheme :AnimalSexScheme ;
+    skos:notation "C" ;
+    skos:prefLabel "Castrado"@es ;
+    skos:topConceptOf :AnimalSexScheme .
+
+#################################################################
+# REPRODUCTION METHOD - Valores conocidos del sector porcino
+#################################################################
+
+:ReproductionMethodScheme rdf:type skos:ConceptScheme ;
+    skos:prefLabel "Método de reproducción porcina"@es .
+
+:ReproMethod_IA rdf:type skos:Concept ;
+    skos:inScheme :ReproductionMethodScheme ;
+    skos:notation "IA" ;
+    skos:prefLabel "Inseminación artificial"@es ;
+    skos:topConceptOf :ReproductionMethodScheme .
+
+:ReproMethod_MN rdf:type skos:Concept ;
+    skos:inScheme :ReproductionMethodScheme ;
+    skos:notation "MN" ;
+    skos:prefLabel "Monta natural"@es ;
+    skos:topConceptOf :ReproductionMethodScheme .
+
+:ReproMethod_TE rdf:type skos:Concept ;
+    skos:inScheme :ReproductionMethodScheme ;
+    skos:notation "TE" ;
+    skos:prefLabel "Transferencia embrionaria"@es ;
+    skos:topConceptOf :ReproductionMethodScheme .
+
+
+###  Generated for ESPORDATA - Hiberus

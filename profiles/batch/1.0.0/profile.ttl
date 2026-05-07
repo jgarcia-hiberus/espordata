@@ -8,6 +8,7 @@
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix adms:  <http://www.w3.org/ns/adms#> .
 @prefix pig:   <https://espordata.eu/vocab/pig#> .
 @prefix esp:   <https://espordata.eu/profiles/dcat/> .
 
@@ -30,15 +31,7 @@ esp:1.0.0
     owl:versionInfo      "1.0.0" ;
     dct:issued           "2025-01-01"^^xsd:date ;
     dct:publisher        <https://espordata.eu/governance> ;
-    dct:isProfileOf      <https://www.w3.org/TR/vocab-dcat-2/> ;
-
-    prof:hasResource [
-        a                   prof:ResourceDescriptor ;
-        rdfs:label          "Validador SHACL del perfil"@es ;
-        prof:hasRole        prof:validation ;
-        prof:hasArtifact    <https://espordata.eu/profiles/dcat/1.0.0/shacl> ;
-        dct:format          <https://www.iana.org/assignments/media-types/text/turtle> ;
-    ] .
+    dct:isProfileOf      <https://www.w3.org/TR/vocab-dcat-2/> .
 
 # ─────────────────────────────────────────────────────────
 #  Propiedades OBLIGATORIAS para dcat:Dataset
@@ -136,6 +129,30 @@ esp:theme a rdf:Property ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      skos:Concept .
 
+esp:status a rdf:Property ;
+    rdfs:label      "Estado del activo"@es ;
+    rdfs:comment    """
+        adms:status. Estado de madurez/ciclo de vida del dataset
+        (activo, retirado, en revisión, etc.). Se recomienda usar la lista
+        controlada ADMS Status (http://purl.org/adms/status/):
+          - Completed        → activo / publicado
+          - UnderDevelopment → en revisión / en desarrollo
+          - Deprecated       → obsoleto pero accesible
+          - Withdrawn        → retirado
+        Rango: skos:Concept. Cardinalidad: 0..1.
+
+        Nota de divergencia respecto a DCAT-AP: en DCAT-AP estándar,
+        adms:status se aplica solo a dcat:Distribution. ESPORDATA la extiende
+        a dcat:Dataset porque el ciclo de vida del lote conceptual es
+        información clave para los consumidores del data space. Esta
+        extensión es semánticamente válida (ADMS no declara rdfs:domain
+        sobre adms:status) y sigue precedentes de otros perfiles
+        sectoriales DCAT-AP nacionales.
+    """@es ;
+    rdfs:domain     dcat:Dataset ;
+    rdfs:range      skos:Concept ;
+    owl:maxCardinality 1 .
+
 # ─────────────────────────────────────────────────────────
 #  Propiedades OPCIONALES para dcat:Dataset
 # ─────────────────────────────────────────────────────────
@@ -192,16 +209,6 @@ esp:modified a rdf:Property ;
     rdfs:domain     dcat:Dataset ;
     rdfs:range      [ owl:unionOf ( xsd:date xsd:dateTime ) ] ;
     owl:maxCardinality 1 .
-
-esp:hasVersion a rdf:Property ;
-    rdfs:label      "Tiene versión"@es ;
-    rdfs:comment    """
-        dct:hasVersion. Enlaza este dataset a otro dataset que es una versión,
-        edición o adaptación del mismo (p. ej. lotes derivados, snapshots).
-        Rango: dcat:Dataset. Cardinalidad: 0..n.
-    """@es ;
-    rdfs:domain     dcat:Dataset ;
-    rdfs:range      dcat:Dataset .
 
 esp:versionInfo a rdf:Property ;
     rdfs:label      "Información de versión"@es ;
